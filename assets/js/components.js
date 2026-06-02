@@ -51,7 +51,15 @@
     mapPin: "map-placeholder__pin",
     visitPanel: "visit-panel reveal",
     visitFacts: "visit-facts",
+    socialShowcase: "social-showcase",
+    socialHeading: "social-heading",
+    videoCard: "video-card",
+    videoFrame: "video-card__frame",
+    videoBody: "video-card__body",
     socialList: "social-list",
+    socialCard: "social-card",
+    socialCardBody: "social-card__body",
+    socialCardAction: "social-card__action",
     socialIcon: "social-icon",
     footer: "site-footer",
     footerInner: "container site-footer__inner",
@@ -411,6 +419,78 @@
       ]
     );
 
+  const externalLinkAttrs = (href) => ({
+    href,
+    target: "_blank",
+    rel: "noreferrer",
+  });
+
+  const buildYoutubeVideo = (video) =>
+    element("article", { className: CLASSES.videoCard }, [
+      element("div", { className: CLASSES.videoFrame }, [
+        element("iframe", {
+          attrs: {
+            title: video.title,
+            src: video.embedUrl,
+            loading: "lazy",
+            allow:
+              "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share",
+            allowfullscreen: true,
+            referrerpolicy: "strict-origin-when-cross-origin",
+          },
+        }),
+      ]),
+      element("div", { className: CLASSES.videoBody }, [
+        element("h3", { text: video.heading }),
+        element("p", { text: video.text }),
+        element("a", {
+          className: CLASSES.buttonPrimary,
+          text: video.channelLabel,
+          attrs: externalLinkAttrs(video.channelUrl),
+        }),
+      ]),
+    ]);
+
+  const buildSocialCards = (socials, accessibility) =>
+    element(
+      "nav",
+      {
+        className: CLASSES.socialList,
+        attrs: { "aria-label": accessibility.socials },
+      },
+      socials.map((social) =>
+        element(
+          "a",
+          {
+            className: CLASSES.socialCard,
+            attrs: externalLinkAttrs(social.href),
+          },
+          [
+            element("span", { className: CLASSES.socialIcon, attrs: { "aria-hidden": "true" } }, [
+              buildIcon(social.icon),
+            ]),
+            element("span", { className: CLASSES.socialCardBody }, [
+              element("strong", { text: social.network }),
+              element("small", { text: social.handle }),
+              element("em", { text: social.text }),
+            ]),
+            element("span", { className: CLASSES.socialCardAction, text: social.actionLabel }),
+          ]
+        )
+      )
+    );
+
+  const buildSocialShowcase = (visit, accessibility) =>
+    element("section", { className: CLASSES.socialShowcase }, [
+      element("div", { className: CLASSES.socialHeading }, [
+        element("p", { className: CLASSES.eyebrow, text: visit.socialHeading.eyebrow }),
+        element("h3", { text: visit.socialHeading.title }),
+        element("p", { text: visit.socialHeading.text }),
+      ]),
+      buildYoutubeVideo(visit.youtubeVideo),
+      buildSocialCards(visit.socials, accessibility),
+    ]);
+
   const buildVisit = (visit, accessibility) =>
     element(
       "section",
@@ -459,40 +539,11 @@
                 element("div", {}, [element("strong", { text: fact.value }), element("span", { text: fact.label })])
               )
             ),
-            element(
-              "nav",
-              {
-                className: CLASSES.socialList,
-                attrs: { "aria-label": accessibility.socials },
-              },
-              visit.socials.map((social) =>
-                element(
-                  "a",
-                  {
-                    attrs: {
-                      href: social.href,
-                      target: "_blank",
-                      rel: "noreferrer",
-                    },
-                  },
-                  [
-                    element("span", { className: CLASSES.socialIcon, attrs: { "aria-hidden": "true" } }, [
-                      buildIcon(social.icon),
-                    ]),
-                    social.network,
-                    element("small", { text: social.handle }),
-                  ]
-                )
-              )
-            ),
+            buildSocialShowcase(visit, accessibility),
             element("a", {
               className: CLASSES.buttonPrimary,
               text: visit.directionsLabel,
-              attrs: {
-                href: visit.map.directionsUrl,
-                target: "_blank",
-                rel: "noreferrer",
-              },
+              attrs: externalLinkAttrs(visit.map.directionsUrl),
             }),
           ]),
         ]),

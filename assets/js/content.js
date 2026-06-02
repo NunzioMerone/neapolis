@@ -199,6 +199,21 @@
         { value: "Dopo", label: "Rinfresco e conversazioni" },
       ],
       directionsLabel: "Apri Google Maps",
+      socialHeading: {
+        eyebrow: "Online",
+        title: "Seguici anche durante la settimana",
+        text:
+          "Video, aggiornamenti e momenti della comunità sono raccolti sui nostri canali social.",
+      },
+      youtubeVideo: {
+        title: "Chiesa Evangelica Neapolis - Promo Video",
+        heading: "Guarda il video della comunità",
+        text:
+          "Un primo sguardo alla vita della chiesa, alle persone e al desiderio che anima Neapolis.",
+        embedUrl: "https://www.youtube.com/embed/AE5LcQlCir8",
+        channelUrl: "https://www.youtube.com/channel/UCc3zWIcVwgsAp4Ib0RltCkQ",
+        channelLabel: "Vai al canale YouTube",
+      },
       map: {
         badge: "Via",
         title: "Mappa Chiesa Evangelica Neapolis",
@@ -213,20 +228,18 @@
         {
           network: "Instagram",
           handle: "@ceneapolis",
+          text: "Foto, storie e aggiornamenti dalla vita della comunità.",
+          actionLabel: "Apri Instagram",
           href: "https://www.instagram.com/ceneapolis/",
           icon: "instagram",
         },
         {
           network: "Facebook",
           handle: "ceneapolis",
+          text: "Eventi, avvisi e contenuti condivisi dalla chiesa.",
+          actionLabel: "Apri Facebook",
           href: "https://www.facebook.com/ceneapolis/",
           icon: "facebook",
-        },
-        {
-          network: "YouTube",
-          handle: "Chiesa Evangelica Neapolis 7140",
-          href: "https://www.youtube.com/results?search_query=chiesa+evangelica+neapolis+7140",
-          icon: "youtube",
         },
       ],
     },
