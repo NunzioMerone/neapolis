@@ -595,77 +595,194 @@ body.nav-open .brand-logo {
 .scripture-layout {
   position: relative;
   z-index: 1;
+  perspective: 1800px;
 }
 
 .scripture-book {
   position: relative;
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  min-height: 440px;
-  border-radius: 14px 24px 24px 14px;
+  min-height: clamp(420px, 44vw, 520px);
+  border-radius: 18px 28px 30px 18px;
   box-shadow:
-    0 34px 80px rgb(0 0 0 / 0.32),
-    0 14px 34px rgb(0 0 0 / 0.22);
+    0 58px 100px rgb(0 0 0 / 0.34),
+    0 18px 36px rgb(0 0 0 / 0.22);
   isolation: isolate;
+  transform: rotateX(6deg);
+  transform-origin: center bottom;
+}
+
+.scripture-book::before,
+.scripture-book::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+}
+
+.scripture-book::before {
+  inset: -1rem -1.05rem -1.45rem;
+  z-index: -3;
+  border-radius: 24px 34px 38px 24px;
+  background:
+    linear-gradient(90deg, rgb(6 24 34 / 0.96), rgb(18 105 141 / 0.74) 48%, rgb(6 24 34 / 0.96)),
+    var(--color-night);
+  box-shadow:
+    inset 0 0 0 1px rgb(255 255 255 / 0.08),
+    0 26px 60px rgb(0 0 0 / 0.34);
+}
+
+.scripture-book::after {
+  right: -0.15rem;
+  bottom: -1.15rem;
+  left: 1.3rem;
+  z-index: -2;
+  height: 2.2rem;
+  border-radius: 0 0 30px 24px;
+  background:
+    repeating-linear-gradient(to bottom, #eef4f7 0 2px, #d6e0e6 2px 4px),
+    #e7eef2;
+  box-shadow:
+    inset 0 -10px 16px rgb(19 45 58 / 0.18),
+    0 12px 22px rgb(0 0 0 / 0.16);
+  transform: skewX(-2deg);
 }
 
 .scripture-book__page {
   position: relative;
   min-height: 100%;
-  padding: clamp(1.8rem, 4vw, 3.2rem);
+  padding: clamp(2.2rem, 4.4vw, 3.75rem);
+  overflow: hidden;
   background:
-    linear-gradient(90deg, rgb(19 45 58 / 0.08), transparent 16%, transparent 84%, rgb(19 45 58 / 0.08)),
-    repeating-linear-gradient(
-      to bottom,
-      transparent 0 2.28rem,
-      rgb(18 105 141 / 0.08) 2.28rem 2.34rem
-    ),
-    #fbfdff;
+    radial-gradient(ellipse at 50% 0, rgb(255 255 255 / 0.95), transparent 54%),
+    linear-gradient(90deg, rgb(19 45 58 / 0.16), transparent 15%, transparent 86%, rgb(19 45 58 / 0.1)),
+    repeating-linear-gradient(to bottom, transparent 0 2.18rem, rgb(18 105 141 / 0.075) 2.18rem 2.24rem),
+    linear-gradient(180deg, #ffffff, #f2f7fa);
   color: var(--color-ink);
+  transform-style: preserve-3d;
+}
+
+.scripture-book__page::before,
+.scripture-book__page::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+}
+
+.scripture-book__page::before {
+  inset: 0;
+  z-index: 0;
+  background:
+    linear-gradient(115deg, rgb(255 255 255 / 0.62), transparent 28%),
+    radial-gradient(ellipse at bottom, rgb(19 45 58 / 0.12), transparent 66%);
+}
+
+.scripture-book__page::after {
+  top: 0.35rem;
+  bottom: 0.5rem;
+  z-index: 0;
+  width: 1.15rem;
+  background:
+    repeating-linear-gradient(to bottom, rgb(19 45 58 / 0.12) 0 1px, transparent 1px 8px);
+  opacity: 0.6;
+}
+
+.scripture-book__page > * {
+  position: relative;
+  z-index: 1;
 }
 
 .scripture-book__page--left {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  border-radius: 14px 0 0 14px;
-  box-shadow: inset -22px 0 34px rgb(19 45 58 / 0.12);
+  border-radius: 18px 6px 12px 18px;
+  clip-path: polygon(0 2.6%, 99.6% 0, 100% 100%, 0 96.8%);
+  box-shadow:
+    inset -42px 0 48px rgb(19 45 58 / 0.18),
+    inset 0 -18px 26px rgb(19 45 58 / 0.12);
+  transform: rotateY(4.5deg);
+  transform-origin: right center;
+}
+
+.scripture-book__page--left::after {
+  right: 0.35rem;
 }
 
 .scripture-book__page--right {
   display: grid;
   align-content: center;
-  border-radius: 0 24px 24px 0;
-  box-shadow: inset 22px 0 34px rgb(19 45 58 / 0.1);
+  padding-right: clamp(5.25rem, 8vw, 7.2rem);
+  border-radius: 6px 28px 30px 12px;
+  clip-path: polygon(0.4% 0, 100% 2.5%, 100% 96.5%, 0 100%);
+  box-shadow:
+    inset 42px 0 48px rgb(19 45 58 / 0.16),
+    inset 0 -18px 26px rgb(19 45 58 / 0.1);
+  transform: rotateY(-4.5deg);
+  transform-origin: left center;
+}
+
+.scripture-book__page--right::before {
+  background:
+    linear-gradient(245deg, rgb(255 255 255 / 0.72), transparent 30%),
+    radial-gradient(ellipse at bottom, rgb(19 45 58 / 0.1), transparent 66%);
+}
+
+.scripture-book__page--right::after {
+  left: 0.35rem;
 }
 
 .scripture-book__spine {
   position: absolute;
+  top: -0.1rem;
+  bottom: -0.2rem;
+  left: 50%;
+  z-index: 5;
+  width: clamp(2.2rem, 4.1vw, 3.6rem);
+  background:
+    linear-gradient(
+      90deg,
+      rgb(10 28 39 / 0.18),
+      rgb(10 28 39 / 0.38) 28%,
+      rgb(255 255 255 / 0.78) 48%,
+      rgb(10 28 39 / 0.42) 72%,
+      rgb(10 28 39 / 0.16)
+    );
+  box-shadow:
+    -28px 0 34px rgb(19 45 58 / 0.18),
+    28px 0 34px rgb(19 45 58 / 0.16),
+    inset 0 0 18px rgb(255 255 255 / 0.54);
+  transform: translateX(-50%);
+}
+
+.scripture-book__spine::after {
+  content: "";
+  position: absolute;
   top: 0;
   bottom: 0;
   left: 50%;
-  z-index: 3;
-  width: clamp(1.2rem, 2.2vw, 2rem);
-  background:
-    linear-gradient(90deg, rgb(19 45 58 / 0.24), rgb(255 255 255 / 0.72), rgb(19 45 58 / 0.22));
+  width: 2px;
+  background: rgb(19 45 58 / 0.45);
   box-shadow:
-    -12px 0 24px rgb(19 45 58 / 0.12),
-    12px 0 24px rgb(19 45 58 / 0.1);
+    -5px 0 9px rgb(255 255 255 / 0.56),
+    5px 0 12px rgb(19 45 58 / 0.32);
   transform: translateX(-50%);
 }
 
 .scripture-book__bookmark {
   position: absolute;
-  top: -0.75rem;
-  right: clamp(3rem, 9vw, 8rem);
-  z-index: 4;
-  width: clamp(2.25rem, 4vw, 3.35rem);
-  height: calc(100% + 2.25rem);
-  border-radius: 0 0 6px 6px;
+  top: -1.55rem;
+  right: clamp(1.65rem, 4vw, 3.4rem);
+  z-index: 6;
+  width: clamp(1.55rem, 2.65vw, 2.3rem);
+  height: calc(100% + 3.1rem);
+  border-radius: 0 0 5px 5px;
   background:
+    linear-gradient(90deg, rgb(255 255 255 / 0.18), transparent 34%),
     linear-gradient(180deg, var(--color-sky), var(--color-brand-dark));
-  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 1.35rem), 50% 100%, 0 calc(100% - 1.35rem));
-  box-shadow: 0 18px 30px rgb(18 105 141 / 0.24);
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 1.15rem), 50% 100%, 0 calc(100% - 1.15rem));
+  box-shadow:
+    0 18px 28px rgb(18 105 141 / 0.24),
+    8px 0 20px rgb(19 45 58 / 0.18);
 }
 
 .scripture-book .eyebrow {
@@ -673,7 +790,7 @@ body.nav-open .brand-logo {
 }
 
 .scripture-book__quote {
-  max-width: 520px;
+  max-width: 500px;
   margin: 0;
 }
 
@@ -681,7 +798,7 @@ body.nav-open .brand-logo {
   margin-bottom: 1rem;
   color: var(--color-ink);
   font-family: var(--font-display);
-  font-size: clamp(1.85rem, 3.8vw, 3.45rem);
+  font-size: clamp(1.8rem, 3.3vw, 3.2rem);
   font-weight: 720;
   line-height: 1.05;
 }
@@ -693,10 +810,11 @@ body.nav-open .brand-logo {
 }
 
 .scripture-book__page h2 {
-  max-width: 440px;
+  max-width: 500px;
   margin-bottom: 1rem;
   color: var(--color-ink);
-  font-size: clamp(1.65rem, 3vw, 2.75rem);
+  font-size: clamp(1.55rem, 2.55vw, 2.45rem);
+  line-height: 1.08;
 }
 
 .scripture-book__note {
@@ -704,16 +822,6 @@ body.nav-open .brand-logo {
   margin-bottom: 0;
   color: var(--color-muted);
   font-size: clamp(1rem, 1.55vw, 1.16rem);
-}
-
-.scripture-book__page--right::after {
-  content: "NEA:POLIS";
-  position: absolute;
-  right: clamp(1.2rem, 3vw, 2rem);
-  bottom: clamp(1.2rem, 3vw, 2rem);
-  color: rgb(18 105 141 / 0.16);
-  font-size: clamp(1.4rem, 4vw, 3rem);
-  font-weight: 800;
 }
 
 .section--activities {
@@ -1241,6 +1349,7 @@ body.nav-open .brand-logo {
     grid-template-columns: 1fr;
     min-height: 0;
     border-radius: var(--radius-large);
+    transform: none;
   }
 
   .scripture-book__page {
@@ -1250,12 +1359,17 @@ body.nav-open .brand-logo {
 
   .scripture-book__page--left {
     border-radius: var(--radius-large) var(--radius-large) 0 0;
+    clip-path: none;
     box-shadow: inset 0 -18px 28px rgb(19 45 58 / 0.1);
+    transform: none;
   }
 
   .scripture-book__page--right {
+    padding-right: 1.35rem;
     border-radius: 0 0 var(--radius-large) var(--radius-large);
+    clip-path: none;
     box-shadow: inset 0 18px 28px rgb(19 45 58 / 0.08);
+    transform: none;
   }
 
   .scripture-book__spine {
@@ -1266,10 +1380,6 @@ body.nav-open .brand-logo {
     top: -0.55rem;
     right: 1.25rem;
     height: 8rem;
-  }
-
-  .scripture-book__page--right::after {
-    display: none;
   }
 
   .social-list {
