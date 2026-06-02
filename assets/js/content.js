@@ -40,9 +40,9 @@
     hero: {
       id: "home",
       eyebrow: "Chiesa Evangelica Neapolis - Napoli",
-      title: "Una casa aperta nel cuore di Napoli.",
+      title: "Una nuova comunità, in un'antica città, con un'eterna verità.",
       lead:
-        "Ci ritroviamo per conoscere Gesù, ascoltare la Bibbia e condividere la vita con semplicità. Se stai cercando una comunità, qui puoi arrivare senza dover dimostrare niente.",
+        "Nel cuore di Napoli ci ritroviamo per ascoltare la Bibbia, pregare e camminare insieme con Gesù.",
       actions: [
         { label: "Vieni domenica", href: "#contatti", variant: "primary" },
         { label: "Guarda le foto", href: "#foto", variant: "secondary" },
@@ -86,12 +86,14 @@
       title: "Una comunità che segue Gesù nella vita reale.",
       text:
         "Neapolis nasce dal desiderio di vivere una fede chiara, vicina, quotidiana. Non vogliamo essere un luogo per chi ha già tutte le risposte, ma una comunità in cui ascoltare Dio, fare domande sincere e camminare insieme con pazienza.",
-      image: {
-        src: "assets/img/community-2.jpg",
-        fallback: fallbackImages.community,
-        alt: "Foto della comunità Neapolis in giardino",
-        width: 1600,
-        height: 1201,
+      video: {
+        title: "Chiesa Evangelica Neapolis - Promo Video",
+        heading: "Guarda il video della comunità",
+        text:
+          "Un primo sguardo alla vita della chiesa, alle persone e al desiderio che anima Neapolis.",
+        embedUrl: "https://www.youtube.com/embed/AE5LcQlCir8",
+        channelUrl: "https://www.youtube.com/channel/UCc3zWIcVwgsAp4Ib0RltCkQ",
+        channelLabel: "Vai al canale YouTube",
       },
       beliefs: [
         {
@@ -116,9 +118,9 @@
       eyebrow: "Una parola per chi arriva",
       quote: "Venite a me, voi tutti che siete affaticati e oppressi, e io vi darò riposo.",
       citation: "Matteo 11:28",
-      title: "Non serve arrivare già a posto.",
+      title: "Il centro non è la nostra forza, ma la grazia di Cristo.",
       text:
-        "Il cuore della fede cristiana non è fingere forza, ma ricevere grazia. Per questo desideriamo essere una comunità dove chi è stanco, curioso, ferito o in ricerca possa trovare ascolto e spazio.",
+        "Per questo la chiesa vuole essere un luogo dove chi cerca, chi è stanco e chi desidera ricominciare possa trovare ascolto, verità e riposo.",
     },
     activities: {
       id: "attivita",
@@ -205,15 +207,6 @@
         text:
           "Video, aggiornamenti e momenti della comunità sono raccolti sui nostri canali social.",
       },
-      youtubeVideo: {
-        title: "Chiesa Evangelica Neapolis - Promo Video",
-        heading: "Guarda il video della comunità",
-        text:
-          "Un primo sguardo alla vita della chiesa, alle persone e al desiderio che anima Neapolis.",
-        embedUrl: "https://www.youtube.com/embed/AE5LcQlCir8",
-        channelUrl: "https://www.youtube.com/channel/UCc3zWIcVwgsAp4Ib0RltCkQ",
-        channelLabel: "Vai al canale YouTube",
-      },
       map: {
         badge: "Via",
         title: "Mappa Chiesa Evangelica Neapolis",
@@ -240,6 +233,14 @@
           actionLabel: "Apri Facebook",
           href: "https://www.facebook.com/ceneapolis/",
           icon: "facebook",
+        },
+        {
+          network: "YouTube",
+          handle: "Chiesa Evangelica Neapolis",
+          text: "Video, testimonianze e contenuti dalla comunità.",
+          actionLabel: "Apri YouTube",
+          href: "https://www.youtube.com/channel/UCc3zWIcVwgsAp4Ib0RltCkQ",
+          icon: "youtube",
         },
       ],
     },

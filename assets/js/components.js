@@ -31,11 +31,20 @@
     introShell: "container intro",
     introText: "intro__text reveal",
     introPhoto: "intro__photo reveal",
+    introVideo: "video-card--intro reveal",
     beliefList: "belief-list reveal",
     beliefItem: "belief-item",
     beliefNumber: "belief-item__number",
     scripture: "scripture section-anchor",
-    scriptureCard: "container scripture-card reveal",
+    scriptureLayout: "container scripture-layout reveal",
+    scriptureBook: "scripture-book",
+    scriptureSpine: "scripture-book__spine",
+    scriptureBookmark: "scripture-book__bookmark",
+    scripturePageLeft: "scripture-book__page scripture-book__page--left",
+    scripturePageRight: "scripture-book__page scripture-book__page--right",
+    scriptureQuote: "scripture-book__quote",
+    scriptureCitation: "scripture-book__citation",
+    scriptureNote: "scripture-book__note",
     activities: "section section--activities section-anchor",
     activityGrid: "activity-grid",
     activityCard: "activity-card reveal",
@@ -182,6 +191,38 @@
     return svg;
   };
 
+  const externalLinkAttrs = (href) => ({
+    href,
+    target: "_blank",
+    rel: "noreferrer",
+  });
+
+  const buildYoutubeVideo = (video, modifierClass = "") =>
+    element("article", { className: [CLASSES.videoCard, modifierClass].filter(Boolean).join(" ") }, [
+      element("div", { className: CLASSES.videoFrame }, [
+        element("iframe", {
+          attrs: {
+            title: video.title,
+            src: video.embedUrl,
+            loading: "lazy",
+            allow:
+              "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share",
+            allowfullscreen: true,
+            referrerpolicy: "strict-origin-when-cross-origin",
+          },
+        }),
+      ]),
+      element("div", { className: CLASSES.videoBody }, [
+        element("h3", { text: video.heading }),
+        element("p", { text: video.text }),
+        element("a", {
+          className: CLASSES.buttonPrimary,
+          text: video.channelLabel,
+          attrs: externalLinkAttrs(video.channelUrl),
+        }),
+      ]),
+    ]);
+
   const buildHeader = (content) => {
     const logo = image(content.logo, CLASSES.brandLogo);
     const brand = element(
@@ -307,6 +348,11 @@
       ]
     );
 
+  const buildIntroMedia = (intro) =>
+    intro.video
+      ? buildYoutubeVideo(intro.video, CLASSES.introVideo)
+      : element("div", { className: CLASSES.introPhoto }, [image({ ...intro.image, loading: "lazy" }, "")]);
+
   const buildIntro = (intro) =>
     element(
       "section",
@@ -321,9 +367,7 @@
             element("h2", { text: intro.title }),
             element("p", { text: intro.text }),
           ]),
-          element("div", { className: CLASSES.introPhoto }, [
-            image({ ...intro.image, loading: "lazy" }, ""),
-          ]),
+          buildIntroMedia(intro),
           element(
             "div",
             { className: CLASSES.beliefList },
@@ -349,13 +393,22 @@
         attrs: { id: scripture.id },
       },
       [
-        element("div", { className: CLASSES.scriptureCard }, [
-          element("p", { className: CLASSES.eyebrow, text: scripture.eyebrow }),
-          element("blockquote", {}, [
-            element("p", { text: `"${scripture.quote}"` }),
-            element("cite", { text: scripture.citation }),
+        element("div", { className: CLASSES.scriptureLayout }, [
+          element("div", { className: CLASSES.scriptureBook }, [
+            element("span", { className: CLASSES.scriptureSpine, attrs: { "aria-hidden": "true" } }),
+            element("span", { className: CLASSES.scriptureBookmark, attrs: { "aria-hidden": "true" } }),
+            element("div", { className: CLASSES.scripturePageLeft }, [
+              element("p", { className: CLASSES.eyebrow, text: scripture.eyebrow }),
+              element("blockquote", { className: CLASSES.scriptureQuote }, [
+                element("p", { text: `"${scripture.quote}"` }),
+                element("cite", { className: CLASSES.scriptureCitation, text: scripture.citation }),
+              ]),
+            ]),
+            element("div", { className: CLASSES.scripturePageRight }, [
+              element("h2", { text: scripture.title }),
+              element("p", { className: CLASSES.scriptureNote, text: scripture.text }),
+            ]),
           ]),
-          element("div", {}, [element("h2", { text: scripture.title }), element("p", { text: scripture.text })]),
         ]),
       ]
     );
@@ -419,38 +472,6 @@
       ]
     );
 
-  const externalLinkAttrs = (href) => ({
-    href,
-    target: "_blank",
-    rel: "noreferrer",
-  });
-
-  const buildYoutubeVideo = (video) =>
-    element("article", { className: CLASSES.videoCard }, [
-      element("div", { className: CLASSES.videoFrame }, [
-        element("iframe", {
-          attrs: {
-            title: video.title,
-            src: video.embedUrl,
-            loading: "lazy",
-            allow:
-              "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share",
-            allowfullscreen: true,
-            referrerpolicy: "strict-origin-when-cross-origin",
-          },
-        }),
-      ]),
-      element("div", { className: CLASSES.videoBody }, [
-        element("h3", { text: video.heading }),
-        element("p", { text: video.text }),
-        element("a", {
-          className: CLASSES.buttonPrimary,
-          text: video.channelLabel,
-          attrs: externalLinkAttrs(video.channelUrl),
-        }),
-      ]),
-    ]);
-
   const buildSocialCards = (socials, accessibility) =>
     element(
       "nav",
@@ -487,7 +508,6 @@
         element("h3", { text: visit.socialHeading.title }),
         element("p", { text: visit.socialHeading.text }),
       ]),
-      buildYoutubeVideo(visit.youtubeVideo),
       buildSocialCards(visit.socials, accessibility),
     ]);
 
