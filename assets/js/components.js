@@ -34,6 +34,7 @@
     introVideo: "video-card--intro reveal",
     beliefList: "belief-list reveal",
     beliefItem: "belief-item",
+    beliefIcon: "belief-item__icon",
     beliefNumber: "belief-item__number",
     sermons: "section section--sermons section-anchor",
     sermonShell: "container sermon-shell",
@@ -125,6 +126,26 @@
         },
       },
       { tag: "path", attrs: { d: "m22 6-10 7L2 6" } },
+    ],
+    book: [
+      { tag: "path", attrs: { d: "M4 19.5A2.5 2.5 0 0 1 6.5 17H20" } },
+      { tag: "path", attrs: { d: "M4 4.5A2.5 2.5 0 0 1 6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15Z" } },
+    ],
+    church: [
+      { tag: "path", attrs: { d: "M5 21h14" } },
+      { tag: "path", attrs: { d: "M7 21V10l5-4 5 4v11" } },
+      { tag: "path", attrs: { d: "M9 21v-6h6v6" } },
+      { tag: "path", attrs: { d: "M12 6V2" } },
+      { tag: "path", attrs: { d: "M10 4h4" } },
+    ],
+    message: [
+      { tag: "path", attrs: { d: "M21 11.5a8.4 8.4 0 0 1-9 8.3 8.8 8.8 0 0 1-3.8-.9L3 20l1.4-4.2A8.2 8.2 0 0 1 3 11.5 8.5 8.5 0 0 1 12 3a8.5 8.5 0 0 1 9 8.5Z" } },
+    ],
+    users: [
+      { tag: "path", attrs: { d: "M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" } },
+      { tag: "circle", attrs: { cx: 9, cy: 7, r: 4 } },
+      { tag: "path", attrs: { d: "M22 21v-2a4 4 0 0 0-3-3.9" } },
+      { tag: "path", attrs: { d: "M16 3.1a4 4 0 0 1 0 7.8" } },
     ],
   };
 
@@ -401,6 +422,7 @@
             element("p", { className: CLASSES.eyebrow, text: intro.eyebrow }),
             element("h2", { text: intro.title }),
             element("p", { text: intro.text }),
+            intro.quote ? element("blockquote", { text: intro.quote }) : null,
           ]),
           buildIntroMedia(intro),
           element(
@@ -408,6 +430,9 @@
             { className: CLASSES.beliefList },
             intro.beliefs.map((belief) =>
               element("article", { className: CLASSES.beliefItem }, [
+                element("span", { className: CLASSES.beliefIcon, attrs: { "aria-hidden": "true" } }, [
+                  buildIcon(belief.icon),
+                ]),
                 element("div", {}, [
                   element("h3", { text: belief.title }),
                   element("p", { text: belief.text }),
@@ -533,7 +558,7 @@
       },
       [
         element("div", { className: CLASSES.galleryHeading }, [
-          element("p", { className: CLASSES.eyebrow, text: gallery.eyebrow }),
+          gallery.eyebrow ? element("p", { className: CLASSES.eyebrow, text: gallery.eyebrow }) : null,
           element("h2", { text: gallery.title }),
         ]),
         element(

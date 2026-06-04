@@ -39,7 +39,6 @@
 
     window.scrollTo(0, 0);
     requestAnimationFrame(() => window.scrollTo(0, 0));
-    window.addEventListener("load", () => window.setTimeout(() => window.scrollTo(0, 0), 0), { once: true });
   };
 
   const scrollToInitialAnchor = () => {

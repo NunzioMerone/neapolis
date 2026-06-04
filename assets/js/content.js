@@ -69,9 +69,10 @@
     intro: {
       id: "chi-siamo",
       eyebrow: "Chi siamo",
-      title: "Una comunità che segue Gesù nella vita reale.",
+      title: "Una nuova comunità in un'antica città.",
       text:
-        "Neapolis nasce dal desiderio di vivere una fede chiara, vicina, quotidiana. Non vogliamo essere un luogo per chi ha già tutte le risposte, ma una comunità in cui ascoltare Dio, fare domande sincere e camminare insieme con pazienza.",
+        "Neapolis è una comunità cristiana evangelica nata nel cuore di Napoli, con il desiderio di vivere e annunciare una verità eterna in modo chiaro, vicino e quotidiano.",
+      quote: "Vivere il Vangelo con semplicità, relazioni vere e speranza per ogni giorno.",
       video: {
         title: "Chiesa Evangelica Neapolis - Promo Video",
         embedUrl:
@@ -80,27 +81,34 @@
       },
       beliefs: [
         {
-          number: "01",
-          title: "Una fede ascoltata",
-          text: "Apriamo la Bibbia per lasciarci guidare, correggere e consolare da una Parola più grande di noi.",
+          icon: "book",
+          title: "Fede chiara e vicina",
+          text:
+            "La fede, per noi, non è un insieme di regole da seguire, ma un cammino da percorrere insieme, fatto di ascolto, crescita e condivisione.",
         },
         {
-          number: "02",
-          title: "Relazioni senza maschere",
-          text: "La chiesa non è una vetrina di persone perfette: è una famiglia che impara a portare pesi, dubbi e gioie.",
+          icon: "church",
+          title: "Una verità eterna",
+          text: "In una città antica come Napoli, il Vangelo resta una speranza viva e attuale.",
         },
         {
-          number: "03",
-          title: "Presenza nel quotidiano",
-          text: "Vogliamo servire Napoli con gesti concreti, attenzione alle persone e una speranza che non resta chiusa alla domenica.",
+          icon: "message",
+          title: "Domande sincere",
+          text:
+            "Non devi avere tutto chiaro per avvicinarti a Dio. Puoi venire così come sei, con la tua storia.",
+        },
+        {
+          icon: "users",
+          title: "Camminare insieme",
+          text: "Siamo una famiglia unita con lo scopo di seguire Cristo.",
         },
       ],
     },
     sermons: {
       id: "prediche",
       eyebrow: "Prediche",
-      title: "Le ultime prediche",
-      text: "Ascolta le prediche più recenti della comunità.",
+      title: "Prediche e messaggi biblici",
+      text: "Messaggi biblici per incoraggiare, guidare e far riflettere.",
       channelId: "UCc3zWIcVwgsAp4Ib0RltCkQ",
       uploadsPlaylistId: "UUc3zWIcVwgsAp4Ib0RltCkQ",
       feedUrl: "https://www.youtube.com/feeds/videos.xml?channel_id=UCc3zWIcVwgsAp4Ib0RltCkQ",
@@ -145,23 +153,26 @@
         {
           label: "Domenica",
           title: "Culto comunitario",
-          text: "Cantiamo, preghiamo e ascoltiamo la Bibbia insieme, con un linguaggio semplice e uno spazio accogliente anche per chi arriva per la prima volta.",
+          text:
+            "Ci ritroviamo come famiglia per lodare Dio, ascoltare la Sua Parola e ricordarci insieme ciò che conta davvero. Un tempo semplice, accogliente e aperto anche a chi si avvicina per la prima volta.",
         },
         {
           label: "Martedì, ore 20:00",
           title: "Studio biblico",
-          text: "Ci incontriamo intorno alla Bibbia per leggere, fare domande e crescere insieme nella fede.",
+          text:
+            "Apriamo la Bibbia con il desiderio di capire, fare domande vere e lasciare che Dio parli alla nostra vita quotidiana. Non una lezione fredda, ma un cammino condiviso nella fede.",
         },
         {
           label: "Durante l'anno",
           title: "Formazione e comunità",
-          text: "Giornate teologiche, momenti per famiglie, incontri con studenti e occasioni di servizio per restare una chiesa in cammino.",
+          text:
+            "Viviamo momenti pensati per crescere, servire e costruire relazioni autentiche: incontri, giornate speciali, attività per famiglie e occasioni per essere una chiesa presente nella città.",
         },
       ],
     },
     gallery: {
       id: "foto",
-      eyebrow: "Foto",
+      eyebrow: "",
       title: "Momenti di vita insieme.",
       note: "Scatti della comunità: culto, tavola, amicizie e tempo condiviso.",
       images: [
