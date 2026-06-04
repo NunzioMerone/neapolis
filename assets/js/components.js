@@ -35,16 +35,14 @@
     beliefList: "belief-list reveal",
     beliefItem: "belief-item",
     beliefNumber: "belief-item__number",
-    scripture: "scripture section-anchor",
-    scriptureLayout: "container scripture-layout reveal",
-    scriptureBook: "scripture-book",
-    scriptureSpine: "scripture-book__spine",
-    scriptureBookmark: "scripture-book__bookmark",
-    scripturePageLeft: "scripture-book__page scripture-book__page--left",
-    scripturePageRight: "scripture-book__page scripture-book__page--right",
-    scriptureQuote: "scripture-book__quote",
-    scriptureCitation: "scripture-book__citation",
-    scriptureNote: "scripture-book__note",
+    sermons: "section section--sermons section-anchor",
+    sermonShell: "container sermon-shell",
+    sermonIntro: "sermon-intro",
+    sermonHeading: "section-heading reveal",
+    sermonGrid: "sermon-grid",
+    sermonCard: "sermon-card",
+    sermonMeta: "sermon-card__meta",
+    sermonStatus: "sermon-status",
     activities: "section section--activities section-anchor",
     activityGrid: "activity-grid",
     activityCard: "activity-card reveal",
@@ -54,12 +52,26 @@
     photoTrack: "photo-track",
     photoNote: "container photo-note reveal",
     visit: "section section--visit section-anchor",
-    visitGrid: "container visit-grid",
+    visitShell: "container visit-shell",
+    visitHeading: "visit-heading reveal",
+    visitHeadingText: "visit-heading__text",
+    visitAddress: "visit-address",
+    visitGrid: "visit-grid",
     mapCard: "map-card reveal",
     mapPlaceholder: "map-placeholder",
     mapPin: "map-placeholder__pin",
     visitPanel: "visit-panel reveal",
     visitFacts: "visit-facts",
+    contactShowcase: "contact-showcase",
+    contactHeading: "contact-heading",
+    contactGrid: "contact-grid",
+    contactPeople: "contact-people",
+    contactEmailPanel: "contact-email-panel",
+    contactCard: "contact-card",
+    contactIcon: "contact-card__icon",
+    contactBody: "contact-card__body",
+    contactActions: "contact-card__actions",
+    contactAction: "contact-card__action",
     socialShowcase: "social-showcase",
     socialHeading: "social-heading",
     videoCard: "video-card",
@@ -96,6 +108,23 @@
         },
       },
       { tag: "path", attrs: { d: "m10 9 5 3-5 3Z" } },
+    ],
+    phone: [
+      {
+        tag: "path",
+        attrs: {
+          d: "M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.4 19.4 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2Z",
+        },
+      },
+    ],
+    mail: [
+      {
+        tag: "path",
+        attrs: {
+          d: "M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Z",
+        },
+      },
+      { tag: "path", attrs: { d: "m22 6-10 7L2 6" } },
     ],
   };
 
@@ -198,30 +227,36 @@
   });
 
   const buildYoutubeVideo = (video, modifierClass = "") =>
-    element("article", { className: [CLASSES.videoCard, modifierClass].filter(Boolean).join(" ") }, [
-      element("div", { className: CLASSES.videoFrame }, [
-        element("iframe", {
-          attrs: {
-            title: video.title,
-            src: video.embedUrl,
-            loading: "lazy",
-            allow:
-              "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share",
-            allowfullscreen: true,
-            referrerpolicy: "strict-origin-when-cross-origin",
-          },
-        }),
-      ]),
-      element("div", { className: CLASSES.videoBody }, [
-        element("h3", { text: video.heading }),
-        element("p", { text: video.text }),
-        element("a", {
-          className: CLASSES.buttonPrimary,
-          text: video.channelLabel,
-          attrs: externalLinkAttrs(video.channelUrl),
-        }),
-      ]),
-    ]);
+    element(
+      "article",
+      { className: [CLASSES.videoCard, modifierClass].filter(Boolean).join(" ") },
+      [
+        element("div", { className: CLASSES.videoFrame }, [
+          element("iframe", {
+            attrs: {
+              title: video.title,
+              src: video.embedUrl,
+              loading: "lazy",
+              allow:
+                "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share",
+              allowfullscreen: true,
+              referrerpolicy: "strict-origin-when-cross-origin",
+            },
+          }),
+        ]),
+        video.videoOnly
+          ? null
+          : element("div", { className: CLASSES.videoBody }, [
+              element("h3", { text: video.heading }),
+              element("p", { text: video.text }),
+              element("a", {
+                className: CLASSES.buttonPrimary,
+                text: video.channelLabel,
+                attrs: externalLinkAttrs(video.channelUrl),
+              }),
+            ]),
+      ]
+    );
 
   const buildHeader = (content) => {
     const logo = image(content.logo, CLASSES.brandLogo);
@@ -373,7 +408,6 @@
             { className: CLASSES.beliefList },
             intro.beliefs.map((belief) =>
               element("article", { className: CLASSES.beliefItem }, [
-                element("span", { className: CLASSES.beliefNumber, text: belief.number }),
                 element("div", {}, [
                   element("h3", { text: belief.title }),
                   element("p", { text: belief.text }),
@@ -385,30 +419,78 @@
       ]
     );
 
-  const buildScripture = (scripture) =>
+  const buildSermonVideo = (video) =>
+    element("article", { className: [CLASSES.videoCard, CLASSES.sermonCard].join(" ") }, [
+      element("div", { className: CLASSES.videoFrame }, [
+        element("iframe", {
+          attrs: {
+            title: video.title,
+            src: video.embedUrl,
+            loading: "lazy",
+            allow:
+              "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share",
+            allowfullscreen: true,
+            referrerpolicy: "strict-origin-when-cross-origin",
+          },
+        }),
+      ]),
+      element("div", { className: CLASSES.videoBody }, [
+        element("span", { className: CLASSES.sermonMeta, text: video.dateLabel }),
+        element("h3", { text: video.heading }),
+        video.text ? element("p", { text: video.text }) : null,
+        element("a", {
+          className: CLASSES.buttonPrimary,
+          text: video.actionLabel || "Guarda su YouTube",
+          attrs: externalLinkAttrs(video.watchUrl),
+        }),
+      ]),
+    ]);
+
+  const buildSermons = (sermons) =>
     element(
       "section",
       {
-        className: CLASSES.scripture,
-        attrs: { id: scripture.id },
+        className: CLASSES.sermons,
+        attrs: { id: sermons.id },
       },
       [
-        element("div", { className: CLASSES.scriptureLayout }, [
-          element("div", { className: CLASSES.scriptureBook }, [
-            element("span", { className: CLASSES.scriptureSpine, attrs: { "aria-hidden": "true" } }),
-            element("span", { className: CLASSES.scriptureBookmark, attrs: { "aria-hidden": "true" } }),
-            element("div", { className: CLASSES.scripturePageLeft }, [
-              element("p", { className: CLASSES.eyebrow, text: scripture.eyebrow }),
-              element("blockquote", { className: CLASSES.scriptureQuote }, [
-                element("p", { text: `"${scripture.quote}"` }),
-                element("cite", { className: CLASSES.scriptureCitation, text: scripture.citation }),
-              ]),
+        element("div", { className: CLASSES.sermonShell }, [
+          element("div", { className: CLASSES.sermonIntro }, [
+            element("div", { className: CLASSES.sermonHeading }, [
+              element("p", { className: CLASSES.eyebrow, text: sermons.eyebrow }),
+              element("h2", { text: sermons.title }),
+              element("p", { text: sermons.text }),
             ]),
-            element("div", { className: CLASSES.scripturePageRight }, [
-              element("h2", { text: scripture.title }),
-              element("p", { className: CLASSES.scriptureNote, text: scripture.text }),
-            ]),
+            element("a", {
+              className: CLASSES.buttonPrimary,
+              text: sermons.channelLabel,
+              attrs: externalLinkAttrs(sermons.channelUrl),
+            }),
           ]),
+          element("p", {
+            className: [CLASSES.sermonStatus, CLASSES.hidden].join(" "),
+            text: sermons.loadingLabel,
+            attrs: { "aria-live": "polite", "data-youtube-status": true },
+          }),
+          element(
+            "div",
+            {
+              className: CLASSES.sermonGrid,
+              attrs: {
+                "data-youtube-latest": true,
+                "data-youtube-feed": sermons.feedUrl,
+                "data-youtube-channel": sermons.channelUrl,
+                "data-youtube-fallback-label": sermons.fallbackLabel,
+                "data-youtube-loading-label": sermons.loadingLabel,
+              },
+            },
+            sermons.fallbackVideos.map((video) =>
+              buildSermonVideo({
+                ...video,
+                actionLabel: sermons.fallbackLabel,
+              })
+            )
+          ),
         ]),
       ]
     );
@@ -472,6 +554,52 @@
       ]
     );
 
+  const normalizeItalianPhone = (phone) => `39${phone.replace(/\D/g, "")}`;
+  const phoneHref = (phone) => `tel:+${normalizeItalianPhone(phone)}`;
+  const whatsappHref = (phone) => `https://wa.me/${normalizeItalianPhone(phone)}`;
+
+  const buildContactCard = (contact) =>
+    element("article", { className: CLASSES.contactCard }, [
+      element("span", { className: CLASSES.contactIcon, attrs: { "aria-hidden": "true" } }, [buildIcon("phone")]),
+      element("span", { className: CLASSES.contactBody }, [
+        element("strong", { text: contact.name }),
+        element("small", { text: contact.role }),
+        element("em", { text: contact.phoneLabel }),
+      ]),
+      element("span", { className: CLASSES.contactActions }, [
+        element("a", {
+          className: CLASSES.contactAction,
+          text: "Chiama",
+          attrs: { href: phoneHref(contact.phone) },
+        }),
+        element("a", {
+          className: CLASSES.contactAction,
+          text: "WhatsApp",
+          attrs: externalLinkAttrs(whatsappHref(contact.phone)),
+        }),
+      ]),
+    ]);
+
+  const buildContactShowcase = (visit) =>
+    element("section", { className: [CLASSES.contactShowcase, CLASSES.reveal].join(" ") }, [
+      element("div", { className: CLASSES.contactHeading }, [
+        element("p", { className: CLASSES.eyebrow, text: visit.contactHeading.eyebrow }),
+        element("h3", { text: visit.contactHeading.title }),
+        element("p", { text: visit.contactHeading.text }),
+      ]),
+      element("div", { className: CLASSES.contactGrid }, [
+        element("div", { className: CLASSES.contactPeople }, visit.contacts.map(buildContactCard)),
+        element("a", { className: CLASSES.contactEmailPanel, attrs: { href: visit.email.href } }, [
+          element("span", { className: CLASSES.contactIcon, attrs: { "aria-hidden": "true" } }, [buildIcon("mail")]),
+          element("span", { className: CLASSES.contactBody }, [
+            element("strong", { text: visit.email.value }),
+            element("small", { text: "Scrivici una email" }),
+          ]),
+          element("span", { className: CLASSES.contactAction, text: "Invia email" }),
+        ]),
+      ]),
+    ]);
+
   const buildSocialCards = (socials, accessibility) =>
     element(
       "nav",
@@ -483,7 +611,7 @@
         element(
           "a",
           {
-            className: CLASSES.socialCard,
+            className: [CLASSES.socialCard, `social-card--${social.icon}`].join(" "),
             attrs: externalLinkAttrs(social.href),
           },
           [
@@ -519,53 +647,65 @@
         attrs: { id: visit.id },
       },
       [
-        element("div", { className: CLASSES.visitGrid }, [
-          element(
-            "div",
-            {
-              className: CLASSES.mapCard,
-              attrs: {
-                "data-map": true,
-                "data-map-src": visit.map.embedUrl,
-                "data-map-title": visit.map.title,
-              },
-            },
-            [
-              element(
-                "button",
-                {
-                  className: CLASSES.mapPlaceholder,
-                  attrs: {
-                    type: "button",
-                    "data-map-load": true,
-                  },
-                },
-                [
-                  element("span", { className: CLASSES.mapPin, text: visit.map.badge }),
-                  element("strong", { text: visit.map.placeholderTitle }),
-                  element("small", { text: visit.map.placeholderText }),
-                ]
-              ),
-            ]
-          ),
-          element("div", { className: CLASSES.visitPanel }, [
-            element("p", { className: CLASSES.eyebrow, text: visit.eyebrow }),
+        element("div", { className: CLASSES.visitShell }, [
+          element("div", { className: CLASSES.visitHeading }, [
             element("h2", { text: visit.title }),
-            element("p", { text: visit.text }),
+            element("p", { className: CLASSES.visitHeadingText }, [
+              visit.text,
+              " La sede è in ",
+              element("strong", { className: CLASSES.visitAddress, text: visit.address }),
+              ".",
+            ]),
+          ]),
+          element("div", { className: CLASSES.visitGrid }, [
             element(
               "div",
-              { className: CLASSES.visitFacts },
-              visit.facts.map((fact) =>
-                element("div", {}, [element("strong", { text: fact.value }), element("span", { text: fact.label })])
-              )
+              {
+                className: CLASSES.mapCard,
+                attrs: {
+                  "data-map": true,
+                  "data-map-src": visit.map.embedUrl,
+                  "data-map-title": visit.map.title,
+                },
+              },
+              [
+                element(
+                  "button",
+                  {
+                    className: CLASSES.mapPlaceholder,
+                    attrs: {
+                      type: "button",
+                      "data-map-load": true,
+                    },
+                  },
+                  [
+                    element("span", { className: CLASSES.mapPin, text: visit.map.badge }),
+                    element("strong", { text: visit.map.placeholderTitle }),
+                    element("small", { text: visit.map.placeholderText }),
+                  ]
+                ),
+              ]
             ),
-            buildSocialShowcase(visit, accessibility),
-            element("a", {
-              className: CLASSES.buttonPrimary,
-              text: visit.directionsLabel,
-              attrs: externalLinkAttrs(visit.map.directionsUrl),
-            }),
+            element("aside", { className: CLASSES.visitPanel }, [
+              element("p", { className: CLASSES.eyebrow, text: visit.schedule.eyebrow }),
+              element("h3", { text: visit.schedule.title }),
+              element("p", { text: visit.schedule.text }),
+              element(
+                "div",
+                { className: CLASSES.visitFacts },
+                visit.facts.map((fact) =>
+                  element("div", {}, [element("strong", { text: fact.value }), element("span", { text: fact.label })])
+                )
+              ),
+              element("a", {
+                className: CLASSES.buttonPrimary,
+                text: visit.directionsLabel,
+                attrs: externalLinkAttrs(visit.map.directionsUrl),
+              }),
+            ]),
           ]),
+          buildContactShowcase(visit),
+          buildSocialShowcase(visit, accessibility),
         ]),
       ]
     );
@@ -598,7 +738,7 @@
         [
           buildHero(content.hero, content.accessibility),
           buildIntro(content.intro),
-          buildScripture(content.scripture),
+          buildSermons(content.sermons),
           buildActivities(content.activities),
           buildGallery(content.gallery, content.accessibility),
           buildVisit(content.visit, content.accessibility),
