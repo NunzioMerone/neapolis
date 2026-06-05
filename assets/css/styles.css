@@ -501,14 +501,73 @@ body.nav-open .brand-logo {
   font-size: 1.07rem;
 }
 
-.intro__text blockquote {
-  max-width: 520px;
+.intro__statement {
+  max-width: 650px;
   margin: 1.6rem 0 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 1rem;
+  align-items: end;
+}
+
+.intro__statement blockquote {
+  margin: 0;
   padding: 0.35rem 0 0.35rem 1.35rem;
   border-left: 2px solid var(--color-brand);
   color: var(--color-slate);
   font-size: clamp(1.12rem, 1.8vw, 1.34rem);
   line-height: 1.55;
+}
+
+.intro__action-link {
+  display: inline-flex;
+  align-items: center;
+  justify-self: end;
+  gap: 0.55rem;
+  padding: 0.35rem 0 0.28rem;
+  border-bottom: 1px solid rgb(18 105 141 / 0.28);
+  color: var(--color-brand-dark);
+  font-weight: 800;
+  line-height: 1;
+  white-space: nowrap;
+  transition:
+    color 180ms ease,
+    border-color 180ms ease,
+    transform 180ms ease;
+}
+
+.intro__action-link:hover,
+.intro__action-link:focus-visible {
+  color: var(--color-brand);
+  border-color: currentColor;
+  transform: translateX(3px);
+}
+
+.intro__action-arrow {
+  position: relative;
+  display: inline-block;
+  width: 1.55rem;
+  height: 1px;
+  flex: 0 0 auto;
+  background: currentColor;
+  transition: transform 180ms ease;
+}
+
+.intro__action-arrow::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 0;
+  width: 0.44rem;
+  height: 0.44rem;
+  border-top: 1.5px solid currentColor;
+  border-right: 1.5px solid currentColor;
+  transform: translateY(-50%) rotate(45deg);
+}
+
+.intro__action-link:hover .intro__action-arrow,
+.intro__action-link:focus-visible .intro__action-arrow {
+  transform: translateX(3px);
 }
 
 .intro__photo {
@@ -1594,6 +1653,14 @@ body.nav-open .brand-logo {
 
   .hero__actions {
     display: grid;
+  }
+
+  .intro__statement {
+    grid-template-columns: 1fr;
+  }
+
+  .intro__action-link {
+    justify-self: end;
   }
 
   .button {

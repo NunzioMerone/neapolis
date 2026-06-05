@@ -30,6 +30,9 @@
     intro: "section section--intro section-anchor",
     introShell: "container intro",
     introText: "intro__text reveal",
+    introStatement: "intro__statement",
+    introActionLink: "intro__action-link",
+    introActionArrow: "intro__action-arrow",
     introPhoto: "intro__photo reveal",
     introVideo: "video-card--intro reveal",
     beliefList: "belief-list reveal",
@@ -247,6 +250,13 @@
     rel: "noreferrer",
   });
 
+  const linkAttrs = (action) =>
+    action.external
+      ? externalLinkAttrs(action.href)
+      : {
+          href: action.href,
+        };
+
   const buildYoutubeVideo = (video, modifierClass = "") =>
     element(
       "article",
@@ -422,7 +432,27 @@
             element("p", { className: CLASSES.eyebrow, text: intro.eyebrow }),
             element("h2", { text: intro.title }),
             element("p", { text: intro.text }),
-            intro.quote ? element("blockquote", { text: intro.quote }) : null,
+            intro.quote || intro.action
+              ? element("div", { className: CLASSES.introStatement }, [
+                  intro.quote ? element("blockquote", { text: intro.quote }) : null,
+                  intro.action
+                    ? element(
+                        "a",
+                        {
+                          className: CLASSES.introActionLink,
+                          attrs: linkAttrs(intro.action),
+                        },
+                        [
+                          element("span", { text: intro.action.label }),
+                          element("span", {
+                            className: CLASSES.introActionArrow,
+                            attrs: { "aria-hidden": "true" },
+                          }),
+                        ]
+                      )
+                    : null,
+                ])
+              : null,
           ]),
           buildIntroMedia(intro),
           element(

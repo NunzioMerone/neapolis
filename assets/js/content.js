@@ -71,8 +71,14 @@
       eyebrow: "Chi siamo",
       title: "Una nuova comunità in un'antica città.",
       text:
-        "Neapolis è una comunità cristiana evangelica nata nel cuore di Napoli, con il desiderio di vivere e annunciare una verità eterna in modo chiaro, vicino e quotidiano.",
-      quote: "Vivere il Vangelo con semplicità, relazioni vere e speranza per ogni giorno.",
+        "Neapolis è una comunità cristiana evangelica nel cuore di Napoli. Crediamo nel Dio uno e trino, nella Bibbia come Parola autorevole di Dio e nel Vangelo di Gesù Cristo: la buona notizia della sua morte e risurrezione, unica speranza per essere riconciliati con Dio e vivere come suo popolo nella città.",
+      quote:
+        "Confessiamo una fede centrata su Cristo, fondata sulla Parola di Dio e sostenuta dalla grazia: una speranza viva che ci unisce come chiesa e ci spinge a servire la città.",
+      action: {
+        label: "Scopri di più",
+        href: "https://tgcitalia.org/documenti-fondanti/#confessione-di-fede",
+        external: true,
+      },
       video: {
         title: "Chiesa Evangelica Neapolis - Promo Video",
         embedUrl:
@@ -82,25 +88,26 @@
       beliefs: [
         {
           icon: "book",
-          title: "Fede chiara e vicina",
+          title: "Scritture al centro",
           text:
-            "La fede, per noi, non è un insieme di regole da seguire, ma un cammino da percorrere insieme, fatto di ascolto, crescita e condivisione.",
+            "Ascoltiamo la Bibbia come Parola di Dio, sufficiente per guidare la fede, la vita e il cammino della chiesa.",
         },
         {
           icon: "church",
-          title: "Una verità eterna",
-          text: "In una città antica come Napoli, il Vangelo resta una speranza viva e attuale.",
+          title: "Vangelo di Cristo",
+          text:
+            "Annunciamo Gesù crocifisso e risorto, il centro della nostra fede e la speranza viva per ogni persona.",
         },
         {
           icon: "message",
-          title: "Domande sincere",
+          title: "Grazia che trasforma",
           text:
-            "Non devi avere tutto chiaro per avvicinarti a Dio. Puoi venire così come sei, con la tua storia.",
+            "Viviamo la fede come risposta alla grazia di Dio: con ravvedimento, fiducia e relazioni sincere.",
         },
         {
           icon: "users",
-          title: "Camminare insieme",
-          text: "Siamo una famiglia unita con lo scopo di seguire Cristo.",
+          title: "Popolo nella città",
+          text: "Camminiamo insieme come chiesa locale, desiderando amare Dio, servirci a vicenda e fare del bene a Napoli.",
         },
       ],
     },
@@ -160,7 +167,7 @@
           label: "Martedì, ore 20:00",
           title: "Studio biblico",
           text:
-            "Apriamo la Bibbia con il desiderio di capire, fare domande vere e lasciare che Dio parli alla nostra vita quotidiana. Non una lezione fredda, ma un cammino condiviso nella fede.",
+            "Apriamo la Bibbia con il desiderio di capire, fare domande vere e lasciare che Dio parli alla nostra vita. Non una lezione fredda, ma un cammino condiviso nella fede.",
         },
         {
           label: "Durante l'anno",
