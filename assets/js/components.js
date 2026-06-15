@@ -39,6 +39,9 @@
     beliefItem: "belief-item",
     beliefIcon: "belief-item__icon",
     beliefNumber: "belief-item__number",
+    valuesCallout: "values-callout reveal",
+    valuesCalloutCopy: "values-callout__copy",
+    valuesCalloutAction: "values-callout__action",
     sermons: "section section--sermons section-anchor",
     sermonShell: "container sermon-shell",
     sermonIntro: "sermon-intro",
@@ -419,6 +422,20 @@
       ? buildYoutubeVideo(intro.video, CLASSES.introVideo)
       : element("div", { className: CLASSES.introPhoto }, [image({ ...intro.image, loading: "lazy" }, "")]);
 
+  const buildValuesCallout = (valuesLink) =>
+    element("article", { className: CLASSES.valuesCallout }, [
+      element("div", { className: CLASSES.valuesCalloutCopy }, [
+        element("p", { className: CLASSES.eyebrow, text: valuesLink.eyebrow }),
+        element("h3", { text: valuesLink.title }),
+        element("p", { text: valuesLink.text }),
+      ]),
+      element("a", {
+        className: [CLASSES.buttonPrimary, CLASSES.valuesCalloutAction].join(" "),
+        text: valuesLink.action.label,
+        attrs: linkAttrs(valuesLink.action),
+      }),
+    ]);
+
   const buildIntro = (intro) =>
     element(
       "section",
@@ -470,6 +487,7 @@
               ])
             )
           ),
+          intro.valuesLink ? buildValuesCallout(intro.valuesLink) : null,
         ]),
       ]
     );

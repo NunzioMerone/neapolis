@@ -447,7 +447,7 @@
 
         return {
           id: videoId,
-          title: item.title || "Predica YouTube",
+          title: item.title || "Sermone YouTube",
           publishedAt: item.pubDate || "",
           watchUrl: watchUrl || `https://www.youtube.com/watch?v=${videoId}`,
         };
@@ -554,7 +554,7 @@
 
     if (!videos.length) {
       if (status) {
-        status.textContent = "Video non disponibili. Apri il canale YouTube per vedere tutte le prediche.";
+        status.textContent = "Video non disponibili. Apri il canale YouTube per vedere tutti i sermoni.";
       }
 
       return;
