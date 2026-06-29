@@ -21,6 +21,7 @@
     navigation: [
       { label: "Home", target: "home" },
       { label: "Chi siamo", target: "chi-siamo" },
+      { label: "Storia", target: "storia" },
       { label: "Sermoni", target: "sermoni" },
       { label: "Attività", target: "attivita" },
       { label: "Foto", target: "foto" },
@@ -120,6 +121,84 @@
           href: "https://www.impattoitalia.org/valori-e-distintivi",
           external: true,
         },
+      },
+    },
+    history: {
+      id: "storia",
+      eyebrow: "La nostra storia",
+      title: "Una storia nata a tavola, cresciuta nella Parola.",
+      lead:
+        "La storia di Neapolis attraversa incontri semplici, passaggi pastorali, collaborazioni e una stessa convinzione: annunciare il Vangelo nel cuore di Napoli.",
+      prompt:
+        "Apri i capitoli per leggere la storia completa, dalle prime riunioni nel 2015 fino al cammino attuale della comunità.",
+      sideImage: {
+        src: "assets/img/neapolis-photo-08.jpg",
+        alt: "Incontro della comunità Neapolis intorno alla tavola",
+        width: 1206,
+        height: 789,
+      },
+      items: [
+        {
+          label: "Settembre 2015",
+          title: "Il primo incontro",
+          teaser: "Tre persone, un pasto condiviso, preghiera e studio biblico nel centro di Napoli.",
+          paragraphs: [
+            "In un martedì di settembre del 2015 tre persone si riunirono per la prima volta per condividere un pasto, pregare e studiare la Bibbia insieme nel salone della Christ Church di Napoli, una chiesa Anglicana ubicata al centro della città.",
+            "Il Signore aveva messo nel cuore del pastore Mark Oden e di sua moglie Jane Oden, inviati dall'Inghilterra dalla società missionaria evangelica Crosslinks, il desiderio di fondare una chiesa nel cuore di Napoli: così è nata la Chiesa Evangelica Neapolis (CEN).",
+          ],
+        },
+        {
+          label: "Ottobre 2016",
+          title: "La comunità prende forma",
+          teaser: "Dagli incontri domenicali nascono ministeri, relazioni e nuovi passi di crescita.",
+          paragraphs: [
+            "Pian piano il gruppo è cresciuto e nell'ottobre del 2016 sono iniziati i primi incontri domenicali settimanali della nostra chiesa.",
+            "Oltre al culto domenicale e allo studio biblico infrasettimanale, nel corso del tempo Dio ha reso possibile la nascita di diversi ministeri all'interno della nostra comunità tra cui quello di sostegno alle persone senza dimora di Napoli, la scuola domenicale per i bambini, il ministero dedicato agli adolescenti e il ministero delle donne.",
+            "Negli anni, il Signore ha continuato a far crescere la nostra comunità sia tramite nuove conversioni che grazie all'arrivo di fratelli provenienti da altre chiese.",
+          ],
+        },
+        {
+          label: "Circa 8 anni",
+          title: "Un servizio pastorale fedele",
+          teaser: "Gli anni del servizio di Mark Oden e il coinvolgimento di nuovi consiglieri nella chiesa.",
+          paragraphs: [
+            "Per circa 8 anni, Mark Oden ha servito come pastore della nostra chiesa, affiancato inizialmente da Francesco Schiano in qualità di assistente pastore.",
+            "Dopo l'uscita di Francesco Schiano, divenuto anziano della Chiesa Evangelica di Bacoli, Luca De Dominicis e Matteo Schiano hanno assunto il ruolo di consiglieri del pastore.",
+          ],
+        },
+        {
+          label: "2025 - marzo 2026",
+          title: "Il passaggio a una nuova guida",
+          teaser: "La chiamata di Mark in Scozia e la scelta di Luca e Matteo come nuovi pastori.",
+          paragraphs: [
+            "Dal 2025, Mark Oden ha ricevuto una chiamata dal Signore a servirLo come pastore in Scozia, presso la Chalmers Church di Edimburgo.",
+            "In vista di questo cambiamento, Mark ha preparato la chiesa alla scelta di nuovi pastori e anziani. I membri della nostra comunità, insieme alla rete Impatto Italia (Acts 29), hanno quindi indicato Luca de Dominicis e Matteo Schiano per questo incarico ed essi sono diventati i nuovi pastori della chiesa nel marzo 2026.",
+          ],
+        },
+        {
+          label: "Oggi",
+          title: "Una chiesa centrata sulla Parola",
+          teaser: "L'identità evangelica riformata della CEN e la gratitudine per chi ha fondato la chiesa.",
+          paragraphs: [
+            "La CEN è una chiesa evangelica conservatrice riformata impegnata a insegnare fedelmente la Parola di Dio in ogni occasione.",
+            "Come chiesa, siamo grati a Crosslinks per aver inviato Mark e Jane, insieme ai loro figli, per fondare la Chiesa Evangelica Neapolis.",
+          ],
+        },
+        {
+          label: "Collaborazioni",
+          title: "Reti e relazioni al servizio del Vangelo",
+          teaser: "Le collaborazioni con GBU, Impatto, TGC Italia e altre realtà cristiane.",
+          paragraphs: [
+            "Grazie a Francesco Schiano, segretario generale del GBU Italia, abbiamo il piacere di collaborare con questo movimento studentesco che si impegna a portare la Bibbia negli ambienti universitari.",
+            "Siamo inoltre collegati a Impatto, la rete di Acts 29 in Italia, e condividiamo una visione per la fondazione di nuove chiese al centro di Napoli.",
+            "Collaboriamo anche con The Gospel Coalition Italia e, nel corso degli anni, abbiamo instaurato rapporti con Open Doors, Youth For Christ Italia e Compassion.",
+          ],
+        },
+      ],
+      closing: {
+        title: "Guardiamo avanti con gratitudine.",
+        text:
+          "Ringraziamo il Padre celeste per la Sua fedeltà e per come ci ha sostenuti fin qui. Guardiamo al futuro con fede ed entusiasmo, certi che continuerà a usare la nostra comunità per annunciare il Vangelo nella nostra città!",
       },
     },
     sermons: {

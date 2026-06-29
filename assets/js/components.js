@@ -42,6 +42,23 @@
     valuesCallout: "values-callout reveal",
     valuesCalloutCopy: "values-callout__copy",
     valuesCalloutAction: "values-callout__action",
+    history: "section section--history section-anchor",
+    historyShell: "container history-shell",
+    historyHeading: "history-heading section-heading reveal",
+    historyLayout: "history-layout",
+    historyAside: "history-aside reveal",
+    historyAsideMedia: "history-aside__media",
+    historyAsideCopy: "history-aside__copy",
+    historyAccordion: "history-accordion",
+    historyChapter: "history-chapter reveal",
+    historyChapterSummary: "history-chapter__summary",
+    historyChapterIntro: "history-chapter__intro",
+    historyChapterMeta: "history-chapter__meta",
+    historyChapterTeaser: "history-chapter__teaser",
+    historyChapterToggle: "history-chapter__toggle",
+    historyChapterContent: "history-chapter__content",
+    historyChapterProse: "history-chapter__prose",
+    historyClosing: "history-closing reveal",
     sermons: "section section--sermons section-anchor",
     sermonShell: "container sermon-shell",
     sermonIntro: "sermon-intro",
@@ -492,6 +509,68 @@
       ]
     );
 
+  const buildHistory = (history) =>
+    element(
+      "section",
+      {
+        className: CLASSES.history,
+        attrs: { id: history.id },
+      },
+      [
+        element("div", { className: CLASSES.historyShell }, [
+          element("div", { className: CLASSES.historyHeading }, [
+            element("p", { className: CLASSES.eyebrow, text: history.eyebrow }),
+            element("h2", { text: history.title }),
+            element("p", { text: history.lead }),
+          ]),
+          element("div", { className: CLASSES.historyLayout }, [
+            element("aside", { className: CLASSES.historyAside, attrs: { "aria-label": "Tappe principali" } }, [
+              history.sideImage
+                ? element("div", { className: CLASSES.historyAsideMedia }, [
+                    image({ ...history.sideImage, loading: "lazy" }, ""),
+                  ])
+                : null,
+              element("div", { className: CLASSES.historyAsideCopy }, [
+                element("span", { text: history.eyebrow }),
+                element("h3", { text: "Dal primo martedì a una comunità nel cuore della città." }),
+                element("p", { text: history.prompt }),
+              ]),
+            ]),
+            element(
+              "div",
+              { className: CLASSES.historyAccordion },
+              history.items.map((item) =>
+                element("details", { className: CLASSES.historyChapter }, [
+                  element("summary", { className: CLASSES.historyChapterSummary }, [
+                    element("span", { className: CLASSES.historyChapterIntro }, [
+                      element("span", { className: CLASSES.historyChapterMeta, text: item.label }),
+                      element("span", { text: item.title }),
+                      element("small", { className: CLASSES.historyChapterTeaser, text: item.teaser }),
+                    ]),
+                    element("span", {
+                      className: CLASSES.historyChapterToggle,
+                      attrs: { "aria-hidden": "true" },
+                    }),
+                  ]),
+                  element("div", { className: CLASSES.historyChapterContent }, [
+                    element(
+                      "div",
+                      { className: CLASSES.historyChapterProse },
+                      item.paragraphs.map((paragraph) => element("p", { text: paragraph }))
+                    ),
+                  ]),
+                ])
+              )
+            ),
+          ]),
+          element("div", { className: CLASSES.historyClosing }, [
+            element("h3", { text: history.closing.title }),
+            element("p", { text: history.closing.text }),
+          ]),
+        ]),
+      ]
+    );
+
   const buildSermonVideo = (video) =>
     element("article", { className: [CLASSES.videoCard, CLASSES.sermonCard].join(" ") }, [
       element("div", { className: CLASSES.videoFrame }, [
@@ -811,6 +890,7 @@
         [
           buildHero(content.hero, content.accessibility),
           buildIntro(content.intro),
+          buildHistory(content.history),
           buildSermons(content.sermons),
           buildActivities(content.activities),
           buildGallery(content.gallery, content.accessibility),
